@@ -2,6 +2,8 @@ package com.sub_project.PhoneService;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.Bean;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 public class PhoneServiceApplication {
@@ -10,4 +12,9 @@ public class PhoneServiceApplication {
 		SpringApplication.run(PhoneServiceApplication.class, args);
 	}
 
+	@Bean
+	//@LoadBalanced
+	public RestTemplate restTemplate(){
+		return new RestTemplate();
+	}
 }

@@ -1,4 +1,5 @@
-package com.sub_project.PhoneService.entity;
+package com.sub_project.PhoneService.VO;
+
 import lombok.Data;
 
 import lombok.AllArgsConstructor;
@@ -10,21 +11,15 @@ import javax.persistence.*;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Phone {
-    //  Book
-//- id: Long
-//- title: String
-//- isbn: String
-//- year: int
+public class Manufacturer{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     @Column(columnDefinition = "NVarchar(255)")
     private String name;
     private int year;
-    private int count;
     @Column(columnDefinition = "NVarchar(255)")
-    private String desciption;
+    private String country;
+    @Column(columnDefinition = "text")
     private String url_ava;
-    private String manufacturerId;
 }
