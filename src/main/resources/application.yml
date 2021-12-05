@@ -2,8 +2,8 @@
 #  port: 9002
 
 spring:
-    application:
-      name: PHONE-SERVICE
+  application:
+    name: PHONE-SERVICE
 
 
 eureka:
