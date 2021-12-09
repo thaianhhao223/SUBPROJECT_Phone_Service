@@ -6,11 +6,13 @@ import com.sub_project.PhoneService.repository.PhoneRedisRepository;
 import com.sub_project.PhoneService.service.PhoneService;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
 import javax.persistence.PostUpdate;
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping("/phones")
 public class HomeController {
@@ -26,19 +28,22 @@ public class HomeController {
         phoneRedisRepository.savePhone(phone);
         return phoneService.savePhone(phone);
     }
+
     @GetMapping("/")
     @RateLimiter(name = "basic")
     public List<ResponseTemplateVO> findAllPhone() {
         return phoneService.findALLPhone();
     }
+
     @GetMapping("/{id}")
     @RateLimiter(name = "basic")
     public ResponseTemplateVO getPhoneWithManufacturer(@PathVariable("id")
                                                             String phoneId){
         return phoneService.getPhoneWithManufacturer(phoneId);
     }
-    @GetMapping("/manufacturer/{id}")
-    public List<ResponseTemplateVO> getPhoneWithManufacturerId(@PathVariable("id")
+    @GetMapping("/manufacturer")
+    @ResponseBody
+    public List<ResponseTemplateVO> getPhoneWithManufacturerId(@RequestParam(name = "manufacturerId")
                                                                String manufacturerId){
         return phoneService.getPhoneWithManufacturerId(manufacturerId);
     }
