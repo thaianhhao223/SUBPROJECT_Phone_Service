@@ -34,7 +34,6 @@ public class PhoneService {
     }
 
     @Retry(name="retrybasic")
-//    @RateLimiter(name = "ratelimiterbasic")
     public List<ResponseTemplateVO> findALLPhone() {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         List<ResponseTemplateVO> listReponse = new ArrayList<ResponseTemplateVO>();

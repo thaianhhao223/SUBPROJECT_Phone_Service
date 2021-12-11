@@ -34,7 +34,6 @@ public class HomeController {
 
     @Cacheable("phones")
     @GetMapping("/")
-    @RateLimiter(name = "ratelimiterbasic")
     public List<ResponseTemplateVO> findAllPhone() {
         return phoneService.findALLPhone();
     }
