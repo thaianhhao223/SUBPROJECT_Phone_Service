@@ -15,17 +15,26 @@ spring:
         max-idle: 8
         min-idle: 0
 resilience4j:
+
   retry:
     instances:
-      basic:
+      retrybasic:
         maxRetryAttemps: 5
         waitDuration: 10s
+      retryAndRateLimit:
+        maxRetryAttempts: 2
+        waitDuration: 1s
+
   ratelimiter:
     instances:
-      basic:
+      ratelimiterbasic:
         limitForPeriod: 2
         limitRefeshPeriod: 10s
         timeoutDuration: 1s
+      retryAndRateLimitExample:
+        limitForPeriod: 1
+        limitRefreshPeriod: 1s
+        timeoutDuration: 250ms
 eureka:
   client:
     register-with-eureka:

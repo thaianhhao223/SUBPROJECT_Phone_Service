@@ -5,7 +5,9 @@ import com.sub_project.PhoneService.entity.Phone;
 import com.sub_project.PhoneService.repository.PhoneRedisRepository;
 import com.sub_project.PhoneService.service.PhoneService;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.repository.query.Param;
 import org.springframework.web.bind.annotation.*;
 
@@ -15,6 +17,7 @@ import java.util.List;
 @CrossOrigin
 @RestController
 @RequestMapping("/phones")
+@Slf4j
 public class HomeController {
     @Autowired
     private PhoneService phoneService;
@@ -29,20 +32,29 @@ public class HomeController {
         return phoneService.savePhone(phone);
     }
 
+    @Cacheable("phones")
     @GetMapping("/")
-    @RateLimiter(name = "basic")
+    @RateLimiter(name = "ratelimiterbasic")
     public List<ResponseTemplateVO> findAllPhone() {
         return phoneService.findALLPhone();
     }
 
+    @Cacheable("phones")
     @GetMapping("/{id}")
-    @RateLimiter(name = "basic")
+    @RateLimiter(name = "ratelimiterbasic")
     public ResponseTemplateVO getPhoneWithManufacturer(@PathVariable("id")
                                                             String phoneId){
         return phoneService.getPhoneWithManufacturer(phoneId);
     }
+
+    @GetMapping("/ratelimiter")
+    public List<Phone> findAllPhoneLimit() {
+        return phoneService.getAllPhone();
+    }
+
     @GetMapping("/manufacturer")
     @ResponseBody
+//    @RateLimiter(name = "ratelimiterbasic")
     public List<ResponseTemplateVO> getPhoneWithManufacturerId(@RequestParam(name = "manufacturerId")
                                                                String manufacturerId){
         return phoneService.getPhoneWithManufacturerId(manufacturerId);

@@ -52,6 +52,10 @@
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-aop</artifactId>
+		</dependency>
 		<!-- https://mvnrepository.com/artifact/com.microsoft.sqlserver/mssql-jdbc -->
 		<dependency>
 			<groupId>com.microsoft.sqlserver</groupId>
@@ -82,41 +86,39 @@
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-retry -->
+<!--		<dependency>-->
+<!--			<groupId>io.github.resilience4j</groupId>-->
+<!--			<artifactId>resilience4j-retry</artifactId>-->
+<!--			<version>1.5.0</version>-->
+<!--		</dependency>-->
 		<dependency>
 			<groupId>io.github.resilience4j</groupId>
-			<artifactId>resilience4j-retry</artifactId>
-			<version>1.5.0</version>
+			<artifactId>resilience4j-spring-boot2</artifactId>
 		</dependency>
-
 		<!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-core -->
-		<dependency>
-			<groupId>io.github.resilience4j</groupId>
-			<artifactId>resilience4j-core</artifactId>
-			<version>1.5.0</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.github.resilience4j</groupId>-->
+<!--			<artifactId>resilience4j-core</artifactId>-->
+<!--			<version>1.5.0</version>-->
+<!--		</dependency>-->
 
-		<dependency>
-			<groupId>io.github.resilience4j</groupId>
-			<artifactId>resilience4j-all</artifactId>
-			<version>1.5.0</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.github.resilience4j</groupId>-->
+<!--			<artifactId>resilience4j-all</artifactId>-->
+<!--			<version>1.5.0</version>-->
+<!--		</dependency>-->
 		<!-- https://mvnrepository.com/artifact/io.github.resilience4j/resilience4j-micrometer -->
-		<dependency>
-			<groupId>io.github.resilience4j</groupId>
-			<artifactId>resilience4j-micrometer</artifactId>
-			<version>1.5.0</version>
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>io.github.resilience4j</groupId>-->
+<!--			<artifactId>resilience4j-micrometer</artifactId>-->
+<!--			<version>1.5.0</version>-->
+<!--		</dependency>-->
 
 		<!-- https://mvnrepository.com/artifact/io.micrometer/micrometer-core -->
 		<dependency>
 			<groupId>io.micrometer</groupId>
 			<artifactId>micrometer-core</artifactId>
 			<version>1.5.0</version>
-		</dependency>
-		<dependency>
-			<groupId>io.github.resilience4j</groupId>
-			<artifactId>resilience4j-annotations</artifactId>
-			<version>1.7.0</version>
 		</dependency>
 	</dependencies>
 

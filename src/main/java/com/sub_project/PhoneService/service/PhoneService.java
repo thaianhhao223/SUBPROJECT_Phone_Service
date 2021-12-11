@@ -4,11 +4,13 @@ import com.sub_project.PhoneService.VO.Manufacturer;
 import com.sub_project.PhoneService.VO.ResponseTemplateVO;
 import com.sub_project.PhoneService.entity.Phone;
 import com.sub_project.PhoneService.repository.PhoneRepository;
+
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
+import io.github.resilience4j.retry.annotation.Retry;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
-import io.github.resilience4j.retry.annotation.Retry;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,11 +21,20 @@ public class PhoneService {
     @Autowired
     private RestTemplate restTemplate;
 
+    private SearchPhoneService searchPhoneService = new SearchPhoneService();
+
     public Phone savePhone(Phone phone) {
         return phoneRepository.save(phone);
     }
-    @Retry(name="basic")
-    @RateLimiter(name = "basic")
+
+    @RateLimiter(name = "retryAndRateLimitExample")
+    public List<Phone> getAllPhone(){
+        List<Phone> list = searchPhoneService.findPhoneList();
+        return list;
+    }
+
+    @Retry(name="retrybasic")
+//    @RateLimiter(name = "ratelimiterbasic")
     public List<ResponseTemplateVO> findALLPhone() {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         List<ResponseTemplateVO> listReponse = new ArrayList<ResponseTemplateVO>();
@@ -40,8 +51,8 @@ public class PhoneService {
         }
         return listReponse;
     }
-    @Retry(name="basic")
-    @RateLimiter(name = "basic")
+    @Retry(name="retrybasic")
+    @RateLimiter(name = "ratelimiterbasic")
     public ResponseTemplateVO getPhoneWithManufacturer(String phoneId) {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         Phone phone = phoneRepository.findById(phoneId).get();
@@ -55,8 +66,8 @@ public class PhoneService {
 
         return vo;
     }
-    @Retry(name="basic")
-    @RateLimiter(name = "basic")
+    @Retry(name="retrybasic")
+    @RateLimiter(name = "ratelimiterbasic")
     public List<ResponseTemplateVO> getPhoneWithManufacturerId(String manufacturerId) {
         ResponseTemplateVO vo = new ResponseTemplateVO();
         List<ResponseTemplateVO> listReponse = new ArrayList<ResponseTemplateVO>();
